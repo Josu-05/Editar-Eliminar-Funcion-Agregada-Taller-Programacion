@@ -35,22 +35,47 @@ public class Equipo {
         throw new Exception("No se encontró el código");
     }
 
-    public void editarJugador(Jugador usado){
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getCodigo() == usado.getCodigo()) {
-                lista.set(i, usado);
-                return;
+   public boolean editarJugador(Jugador usado){
+        int inf = 0;
+        int sup = lista.size() - 1;
+        int medio;
+
+        while (inf <= sup) {
+            medio = (inf + sup) / 2;
+            int codigoActual = lista.get(medio).getCodigo();
+
+            if (codigoActual == usado.getCodigo()) {
+                lista.set(medio, usado);
+                return true;
+            } else if (usado.getCodigo() < codigoActual) {
+                sup = medio - 1;
+            } else {
+                inf = medio + 1;
             }
         }
+
+        return false;
     }
 
-    public boolean eliminarJugador(int codigo){
-        for (int i = 0; i < lista.size(); i++){
-            if (lista.get(i).getCodigo() == codigo){
-                lista.remove(i);
+   public boolean eliminarJugador(int codigo){
+        int inf = 0;
+        int sup = lista.size() - 1;
+        int medio;
+
+        while (inf <= sup) {
+            medio = (inf + sup) / 2;
+            int codigoActual = lista.get(medio).getCodigo();
+
+            if (codigoActual == codigo) {
+                lista.remove(medio);
                 return true;
+            } else if (codigo < codigoActual) {
+                sup = medio - 1;
+            } else {
+                inf = medio + 1;
             }
         }
+
         return false;
     }
 
